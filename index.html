@@ -32,6 +32,8 @@ body {
     font-family: 'Rajdhani', sans-serif;
     line-height: 1.6;
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
 }
 
 @keyframes glowBackground {
@@ -40,7 +42,18 @@ body {
     100% { background: radial-gradient(circle at center, #5a0000 0%, #2a0000 60%, #1a0000 100%); }
 }
 
-.container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+.container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; position: relative; z-index:2; }
+
+/* Blood Canvas */
+#bloodCanvas {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:1;
+}
 
 /* Header */
 header { text-align: center; margin-bottom: 60px; }
@@ -147,7 +160,7 @@ header { text-align: center; margin-bottom: 60px; }
 .oled-line.title { text-align:center; font-size:1.2rem; font-weight:bold; }
 .oled-line.status { display:flex; justify-content:flex-start; font-size:1rem; }
 .oled-on { color: var(--accent-green); }
-.oled-off { color: var(--accent-gray); margin-left: 2px; } /* <-- ONLY CHANGE: nudges OFF closer */
+.oled-off { color: var(--accent-gray); margin-left: 2px; }
 
 /* Quick Reference */
 .quick-ref { background: var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:25px; overflow-x:auto; }
@@ -171,43 +184,126 @@ footer .author { font-family:'Orbitron',sans-serif; color: var(--accent-purple);
     .oled-mockup { font-size:0.85rem; min-width:auto; width:100%; }
     .led-grid { grid-template-columns:1fr; }
 }
-/* ================= BLOOD DRIP BACKGROUND ================= */
+<style>
+    /* all your original CSS is here already */
 
-.blood-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-}
+    /* ================= HORROR BLOOD OVERLAY (DRIPS + TCM SPLATTER) ================= */
+    .blood-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+    }
 
-.blood-line {
-    position: absolute;
-    top: -200px;
-    width: 6px;
-    height: 300px;
-    background: linear-gradient(to bottom, rgba(255,0,0,0.9), rgba(120,0,0,0.6), transparent);
-    border-radius: 0 0 20px 20px;
-    animation: drip 6s linear infinite, glowBlood 3s ease-in-out infinite alternate;
-    box-shadow: 0 0 15px rgba(255,0,0,0.6);
-    opacity: 0.8;
-}
+    .blood-line {
+        position: absolute;
+        top: -250px;
+        width: 8px;
+        height: 420px;
+        background: linear-gradient(to bottom,
+            rgba(255,40,40,1),
+            rgba(160,0,0,0.9),
+            rgba(90,0,0,0.7),
+            transparent
+        );
+        border-radius: 0 0 25px 25px;
+        animation: drip 9s linear infinite, glowBlood 4s ease-in-out infinite alternate;
+        box-shadow:
+            0 0 14px rgba(255,0,0,0.7),
+            inset 0 -8px 12px rgba(255,255,255,0.2);
+        opacity: 0.9;
+    }
 
-@keyframes drip {
-    0% { transform: translateY(0); opacity: 0; }
-    10% { opacity: 1; }
-    100% { transform: translateY(120vh); opacity: 0; }
-}
+    @keyframes drip {
+        0% { transform: translateY(0); opacity: 0; }
+        10% { opacity: 1; }
+        100% { transform: translateY(140vh); opacity: 0; }
+    }
 
-@keyframes glowBlood {
-    0% { filter: brightness(0.6); }
-    100% { filter: brightness(1.4); }
-}
+    @keyframes glowBlood {
+        0% { filter: brightness(0.6); }
+        100% { filter: brightness(1.5); }
+    }
 
+    .blood-splatter {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background:
+            radial-gradient(circle at 40% 40%,
+                rgba(200,0,0,0.95) 0%,
+                rgba(140,0,0,0.9) 20%,
+                rgba(90,0,0,0.7) 45%,
+                rgba(50,0,0,0.5) 60%,
+                transparent 75%
+            );
+        border-radius: 50%;
+        opacity: 0.8;
+        filter: blur(0.6px);
+        animation: splatterPulse 8s ease-in-out infinite alternate;
+        box-shadow:
+            0 0 35px rgba(255,0,0,0.25),
+            inset 0 0 25px rgba(0,0,0,0.6);
+    }
+
+    .blood-splatter::before,
+    .blood-splatter::after {
+        content: '';
+        position: absolute;
+        width: 160px;
+        height: 60px;
+        background: linear-gradient(to right,
+            rgba(160,0,0,0.9),
+            rgba(90,0,0,0.6),
+            transparent
+        );
+        border-radius: 50%;
+        filter: blur(0.8px);
+        opacity: 0.7;
+    }
+
+    .blood-splatter::before {
+        top: 50px;
+        left: -70px;
+        transform: rotate(-25deg);
+    }
+
+    .blood-splatter::after {
+        top: 110px;
+        left: 90px;
+        transform: rotate(35deg);
+    }
+
+    .blood-drop {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background: radial-gradient(circle,
+            rgba(200,0,0,1),
+            rgba(120,0,0,0.8),
+            transparent
+        );
+        border-radius: 50%;
+        filter: blur(0.4px);
+        opacity: 0.8;
+        box-shadow: 0 0 10px rgba(255,0,0,0.4);
+    }
+
+    @keyframes splatterPulse {
+        0% { opacity: 0.4; filter: brightness(0.7) blur(0.8px); }
+        100% { opacity: 0.85; filter: brightness(1.1) blur(0.4px); }
+    }
+
+    .container {
+        position: relative;
+        z-index: 5;
+    }
 </style>
+
 </head>
 <!-- BLOOD DRIP OVERLAY -->
 <div class="blood-overlay">
@@ -219,7 +315,8 @@ footer .author { font-family:'Orbitron',sans-serif; color: var(--accent-purple);
     <div class="blood-line" style="left:60%; animation-delay:0.5s;"></div>
     <div class="blood-line" style="left:75%; animation-delay:2.5s;"></div>
     <div class="blood-line" style="left:90%; animation-delay:1.5s;"></div>
-</div>
+
+<canvas id="bloodCanvas"></canvas>
 
 <div class="container">
 
@@ -372,7 +469,7 @@ footer .author { font-family:'Orbitron',sans-serif; color: var(--accent-purple);
 <ul class="tips-list">
 <li style="color:#fff;">Hold L2/LT while pressing DPAD directions to toggle features without affecting gameplay.</li>
 <li style="color:#0f0;">Use R2 Hold with the Inf Death Machine or Skull of Nan Sapwe (Map: Zetsubou No Shima) For best results.</li>
-<li style="color:#0f0;">To Do the Infinite Death Machine glitch: u will need 1-2-3 glitched out weapons i do it with 2-3 but its up to u and u will also need either Reign Drops or Fatal Contraption. now u will pack 2-3 glitched guns throw a nade pop ur gum and collect the DM power up just shoot when it runs out u will now have INF DM. Now For The Inf Skull u will collect the skulls clean them and finish it all up till u get it once u have the Skull gun buy the bowie knife now u will pack 2-3 glitched weapons after u do that pull out the skull use it all when it hits 0 knife and kill 1 zombie/spider when u do that hold shoot and it will fill back up now its inf. Now For Inf shield u will pack 2-3 guns pull out shield let zombies break it now u have Inf shield. DownSide To Doing This!  u cant revive or throw nades or anything else it will ruin it and u will need to fully restart by dying or restarting game/app.</li>
+<li style="color:#0f0;">To Do the Infinite Death Machine glitch: u will need 1-2-3 glitched out weapons i do it with 2-3 but its up to u and u will also need either Reign Drops or Fatal Contraption. now u will pack 2-3 glitched guns throw a nade pop ur gum and collect the DM power up just shoot when it runs out u will now have INF DM. Now For The Inf Skull u will collect the skulls clean them and finish it all up till u get it once you have the Skull gun buy the bowie knife now u will pack 2-3 glitched weapons after u do that pull out the skull use it all when it hits 0 knife and kill 1 zombie/spider when u do that hold shoot and it will fill back up now its inf. Now For Inf shield u will pack 2-3 guns pull out shield let zombies break it now u have Inf shield. DownSide To Doing This!  u cant revive or throw nades or anything else it will ruin it and u will need to fully restart by dying or restarting game/app.</li>
 <li style="color:#0f0;">
   If Your PS4/5 Watch 
   <a href="https://www.youtube.com/watch?v=xk-53YdGh9Q" target="_blank"
@@ -395,7 +492,9 @@ footer .author { font-family:'Orbitron',sans-serif; color: var(--accent-purple);
   and 
   <span style="color:#00ff66;">Xbox (LT/RT/A)</span>
   controllers.
+</ul>
 </section>
+
 <!-- ================= Footer ================= -->
 <footer>
 <p>BO3/TCM Script</p>
@@ -404,5 +503,75 @@ footer .author { font-family:'Orbitron',sans-serif; color: var(--accent-purple);
 </footer>
 
 </div>
+
+<script>
+// ===== REALISTIC BLOOD SPLATTER =====
+const canvas = document.getElementById('bloodCanvas');
+const ctx = canvas.getContext('2d');
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+});
+
+function random(min,max){return Math.random()*(max-min)+min;}
+
+class SplatterParticle{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+        this.length=random(10,50);
+        this.angle=random(0,Math.PI*2);
+        this.speed=random(0.5,2);
+        this.size=random(1,3);
+        this.opacity=random(0.4,0.9);
+        this.life=random(50,150);
+        this.decay=0.95+random(0,0.01);
+        this.color=`rgba(${Math.floor(random(150,255))},0,0,${this.opacity})`;
+    }
+    update(){
+        this.x+=Math.cos(this.angle)*this.speed;
+        this.y+=Math.sin(this.angle)*this.speed;
+        this.speed*=this.decay;
+        this.opacity*=0.96;
+        this.life--;
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.moveTo(this.x,this.y);
+        ctx.lineTo(this.x+Math.cos(this.angle)*this.length*this.opacity,this.y+Math.sin(this.angle)*this.length*this.opacity);
+        ctx.strokeStyle=this.color;
+        ctx.lineWidth=this.size;
+        ctx.stroke();
+    }
+}
+
+let splatters=[];
+
+function addSplatter(){
+    const count=random(2,5);
+    for(let i=0;i<count;i++){
+        const x=random(0,width);
+        const y=random(0,height);
+        splatters.push(new SplatterParticle(x,y));
+    }
+}
+
+function animate(){
+    ctx.clearRect(0,0,width,height);
+    if(Math.random()<0.2)addSplatter();
+    splatters.forEach((p,i)=>{
+        p.update();
+        p.draw();
+        if(p.life<=0)splatters.splice(i,1);
+    });
+    requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
 </body>
 </html>
