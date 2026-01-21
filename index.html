@@ -374,7 +374,7 @@ body {
     background-size: auto 100%;
     opacity: 0.15;
     pointer-events: none;
-    z-index: 4;
+    z-index: 1;
 }
 
 /* COD Zombie Background - Right */
@@ -389,7 +389,7 @@ body {
     opacity: 0.2;
     filter: drop-shadow(0 0 15px red);
     pointer-events: none;
-    z-index: 4;
+    z-index: 2;
 }
 
 /* Container */
@@ -622,39 +622,37 @@ footer .author { font-family:'Orbitron',sans-serif; color: var(--accent-purple);
 <h2 class="section-title">Quick Reference</h2>
 <div class="quick-ref">
 <table>
-<thead>
-<tr>
-<th>Input</th>
-<th>Feature</th>
-<th>LED Color</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="key" style="background-color:#0f0;text-shadow:0 0 5px #0f0,0 0 10px #0f0;">L2</span> + <span class="key" style="background-color:#0f0;text-shadow:0 0 5px #0f0,0 0 10px #0f0;">←</span></td>
-<td>Toggle R2 Hold</td>
-<td><span class="led-dot green"></span></td>
-</tr>
-<tr>
-<td><span class="key" style="background-color:#3ABEFF;text-shadow:0 0 5px #3ABEFF,0 0 10px #3ABEFF;">L2</span> + <span class="key" style="background-color:#3ABEFF;text-shadow:0 0 5px #3ABEFF,0 0 10px #3ABEFF;">↓</span></td>
-<td>Toggle X/A Spam</td>
-<td><span class="led-dot blue"></span></td>
-</tr>
-<tr>
-<td><span class="key" style="background-color:#B27FFF;text-shadow:0 0 5px #B27FFF,0 0 10px #B27FFF;">L2</span> + <span class="key" style="background-color:#B27FFF;text-shadow:0 0 5px #B27FFF,0 0 10px #B27FFF;">→</span></td>
-<td>Toggle LQ</td>
-<td><span class="led-dot purple"></span></td>
-</tr>
-<tr>
-<td><span class="key" style="background-color:#ff69b4;text-shadow:0 0 5px #ff69b4,0 0 10px #ff69b4;">L2</span> + <span class="key" style="background-color:#ff69b4;text-shadow:0 0 5px #ff69b4,0 0 10px #ff69b4;">↑</span></td>
-<td>Toggle SQ</td>
-<td><span class="led-dot pink"></span></td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Input</th>
+      <th>Feature</th>
+      <th>LED Color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="key" style="background-color:#0f0;text-shadow:0 0 5px #0f0,0 0 10px #0f0;">Must BE L2</span> + <span class="key" style="background-color:#0f0;text-shadow:0 0 5px #0f0,0 0 10px #0f0;">←</span></td>
+      <td>Toggle R2 Hold</td>
+      <td style="color: var(--accent-green);">● Green</td>
+    </tr>
+    <tr>
+      <td><span class="key" style="background-color:#3ABEFF;text-shadow:0 0 5px #3ABEFF,0 0 10px #3ABEFF;">Must BE L2</span> + <span class="key" style="background-color:#3ABEFF;text-shadow:0 0 5px #3ABEFF,0 0 10px #3ABEFF;">↓</span></td>
+      <td>Toggle X/A Spam</td>
+      <td style="color: var(--accent-blue);">● Blue</td>
+    </tr>
+    <tr>
+      <td><span class="key" style="background-color:#B27FFF;text-shadow:0 0 5px #B27FFF,0 0 10px #B27FFF;">Must BE L2</span> + <span class="key" style="background-color:#B27FFF;text-shadow:0 0 5px #B27FFF,0 0 10px #B27FFF;">→</span></td>
+      <td>Toggle LQ Clicker</td>
+      <td style="color: var(--accent-purple);">● Purple</td>
+    </tr>
+    <tr>
+      <td><span class="key" style="background-color:#ff69b4;text-shadow:0 0 5px #ff69b4,0 0 10px #ff69b4;">Must BE L2</span> + <span class="key" style="background-color:#ff69b4;text-shadow:0 0 5px #ff69b4,0 0 10px #ff69b4;">↑</span></td>
+      <td>Toggle SQ</td>
+      <td style="color: var(--accent-pink);">● Pink</td>
+    </tr>
+  </tbody>
 </table>
 </div>
-</section>
-
 <!-- ================= Tips & Usage ================= -->
 <section>
 <h2 class="section-title">Tips & Usage</h2>
