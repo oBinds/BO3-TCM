@@ -359,7 +359,6 @@ body {
     z-index: 0;
 }
 
-/* Leatherface Background - Left */
 #leatherface-bg {
     position: fixed;
     top: 0;
@@ -368,12 +367,16 @@ body {
     height: 100%;
     background: url(https://raw.githubusercontent.com/oBinds/BO3-TCM/main/LeatherFace.png) no-repeat left bottom;
     background-size: auto 100%;
+    background-attachment: fixed;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
     opacity: 0.15;
     pointer-events: none;
     z-index: 4;
 }
 
-/* COD Zombie Background - Right */
 #zombie-bg {
     position: fixed;
     top: 0;
@@ -382,11 +385,17 @@ body {
     height: 100%;
     background: url(https://raw.githubusercontent.com/oBinds/BO3-TCM/main/Zombie.png) no-repeat right bottom;
     background-size: auto 100%;
+    background-attachment: fixed;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
     opacity: 0.2;
     filter: drop-shadow(0 0 15px red);
     pointer-events: none;
     z-index: 4;
 }
+
 
 /* Container */
 .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 3; }
