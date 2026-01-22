@@ -252,6 +252,14 @@ html, body {
   #zombie-bg {
     background-attachment: scroll !important;
   }
+/* ================= MOBILE BACKGROUND FIX ================= */
+@media (max-width: 768px) {
+  #leatherface-bg,
+  #zombie-bg {
+    background-attachment: scroll !important;  /* fixes disappearing images */
+    background-size: contain !important;        /* keeps aspect ratio */
+    opacity: 0.15 !important;                   /* same opacity as desktop */
+  }
 }
 </style>
 </head>
