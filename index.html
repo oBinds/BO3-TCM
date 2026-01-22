@@ -252,41 +252,6 @@ html, body {
   #zombie-bg {
     background-attachment: scroll !important;
   }
-/* ================= MOBILE BACKGROUND FIX ================= */
-@media (max-width: 768px) {
-  #leatherface-bg,
-  #zombie-bg {
-    background-attachment: scroll !important;  /* fixes disappearing images */
-    background-size: contain !important;        /* keeps aspect ratio */
-    opacity: 0.15 !important;                   /* same opacity as desktop */
-  }
-}
-/* ================= MOBILE BACKGROUND FIX (SHOW IMAGES) ================= */
-@media (max-width: 768px) {
-  #leatherface-bg {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 60% !important;
-    height: auto !important;
-    min-height: 200px; /* ensures it’s visible */
-    background-size: contain !important;
-    background-position: left bottom !important;
-    opacity: 0.15 !important;
-  }
-
-  #zombie-bg {
-    position: absolute !important;
-    top: 0 !important;
-    right: 0 !important;
-    width: 50% !important;
-    height: auto !important;
-    min-height: 200px;
-    background-size: contain !important;
-    background-position: right bottom !important;
-    opacity: 0.2 !important;
-    filter: drop-shadow(0 0 10px red) !important;
-  }
 }
 </style>
 </head>
