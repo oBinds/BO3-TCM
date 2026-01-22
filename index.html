@@ -52,19 +52,17 @@ body {
     z-index: 0;
 }
 
+/* Backgrounds: fill left/right halves, full height */
 #leatherface-bg {
     position: fixed;
     top: 0;
-    left: -180px;
-    width: 65%;
+    left: 0;
+    width: 50%;
     height: 100%;
-    background: url(https://raw.githubusercontent.com/oBinds/BO3-TCM/main/LeatherFace.png) no-repeat left bottom;
+    background: url(https://raw.githubusercontent.com/oBinds/BO3-TCM/main/LeatherFace.png) no-repeat;
     background-size: auto 100%;
+    background-position: -180px center; /* shifted further left */
     background-attachment: fixed;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    will-change: transform;
     opacity: 0.15;
     pointer-events: none;
     z-index: 4;
@@ -76,19 +74,26 @@ body {
     right: 0;
     width: 50%;
     height: 100%;
-    background: url(https://raw.githubusercontent.com/oBinds/BO3-TCM/main/Zombie.png) no-repeat right bottom;
+    background: url(https://raw.githubusercontent.com/oBinds/BO3-TCM/main/Zombie.png) no-repeat;
     background-size: auto 100%;
+    background-position: right center;
     background-attachment: fixed;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    will-change: transform;
     opacity: 0.2;
-    filter: drop-shadow(0 0 15px red);
     pointer-events: none;
     z-index: 4;
 }
 
+/* Mobile override */
+@media (max-width: 768px) {
+    #leatherface-bg,
+    #zombie-bg {
+        position: absolute;
+        background-size: contain; /* keep aspect ratio on mobile */
+        background-attachment: scroll;
+        height: auto;
+        min-height: 200px;
+    }
+}
 
 /* Container */
 .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 3; }
