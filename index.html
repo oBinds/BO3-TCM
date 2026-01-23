@@ -98,11 +98,25 @@ body {
 /* Container */
 .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 3; }
 
-/* Header */
-header { text-align: center; margin-bottom: 60px; }
-.logo { font-family: 'Orbitron', sans-serif; font-size: 4rem; font-weight: 900; letter-spacing: 8px; color: #000; text-shadow: 0 0 10px #333, 0 0 20px #555, 0 0 30px #777, 0 0 40px #999; }
-.subtitle { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: #000; text-shadow: 0 0 5px #333, 0 0 10px #555, 0 0 15px #777, 0 0 20px #999; letter-spacing: 6px; margin-top: 10px; text-transform: uppercase; }
-.author-badge { display: inline-block; margin-top: 20px; padding: 10px 25px; background: linear-gradient(135deg, var(--accent-purple), #8844dd); color: var(--text-primary); font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; border-radius: 50px; box-shadow: 0 0 25px rgba(180, 74, 255, 0.4); }
+.author-badge { 
+    display: block;              /* force full line */
+    width: fit-content;          /* shrink to text */
+    margin: 20px auto 0 auto;    /* HARD center */
+    padding: 10px 25px; 
+    background: linear-gradient(135deg, #000, #000); 
+    color: #000; /* black letters */
+    font-family: 'Orbitron', sans-serif; 
+    font-weight: 700; 
+    font-size: 0.9rem; 
+    letter-spacing: 2px; 
+    border-radius: 50px; 
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.6); 
+    text-shadow:
+        0 0 5px rgba(255,0,0,0.7),
+        0 0 10px rgba(255,0,0,0.6),
+        0 0 15px rgba(255,0,0,0.5),
+        0 0 20px rgba(255,0,0,0.4);
+}
 
 /* Section titles */
 .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--accent-pink); margin-bottom: 25px; padding-bottom: 10px; border-bottom: 2px solid var(--border-color); display: flex; align-items: center; gap: 15px; }
@@ -177,7 +191,17 @@ header { text-align: center; margin-bottom: 60px; }
 
 footer { text-align:center; padding:40px 20px; border-top:1px solid var(--border-color); margin-top:60px; }
 footer p { color: var(--text-secondary); font-size:0.95rem; margin-bottom:10px; }
-footer .author { font-family:'Orbitron',sans-serif; color: var(--accent-purple); font-weight:700; font-size:1.1rem; }
+footer .author { 
+    font-family:'Orbitron', sans-serif; 
+    color: #000; /* black letters */
+    font-weight:700; 
+    font-size:1.1rem;
+    text-shadow: 
+        0 0 5px rgba(255,0,0,0.7),
+        0 0 10px rgba(255,0,0,0.6),
+        0 0 15px rgba(255,0,0,0.5),
+        0 0 20px rgba(255,0,0,0.4); /* red glow behind letters */
+}
 
 @media (max-width:600px){
     .feature-header { flex-direction: column; }
@@ -324,7 +348,6 @@ html, body {
 <p class="subtitle">Texas ChainSaw Massacre / BO3</p>
 <div class="author-badge">by O.BINDS Creadits to boogiebangz68</div>
 </header>
-
 <!-- ================= FEATURES ================= -->
 <section>
 <h2 class="section-title">Features</h2>
